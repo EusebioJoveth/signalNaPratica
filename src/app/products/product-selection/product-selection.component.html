@@ -1,0 +1,41 @@
+
+<div class="content">
+  <div class="title">
+    {{pageTitle}}
+  </div>
+
+  <div class="grid">
+    <div class="row">
+      <div class="cellFull">
+        <select [(ngModel)]="produtoSelecionado" class="select" id="produtos">
+          @for (produto of produtos(); track produto.id) {
+            <option [ngValue]="produto">{{produto.productName}}</option>
+          }
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cellLeft">Nome:</div>
+      <div class="cellRight">{{produtoSelecionado()?.productName}}</div>
+    </div>
+    <div class="row">
+      <div class="cellLeft">Descrição:</div>
+      <div class="cellRight">{{produtoSelecionado()?.description}}</div>
+    </div>
+    <div class="row">
+      <div class="cellLeft">Preço:</div>
+      <div class="cellRight">{{produtoSelecionado()?.price}}</div>
+    </div>
+
+    <div class="row">
+      <div class="cellLeft"><label for="quantidade">Quantidade</label></div>
+      <div class="cellRight">
+        <div class="inputContainer">
+          <button class="qtyButton qtyButtonLeft" (click)="onDecrease()">-</button>
+          <input class="quantityInput" id="quantidade" type="number" [(ngModel)]="quantidade">
+          <button class="qtyButton qtyButtonRight" (click)="onIncrease()">+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

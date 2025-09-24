@@ -1,13 +1,14 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductData } from '../product.data';
 import { Product } from '../models/product';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-selection',
   templateUrl: './product-selection.component.html',
   styleUrls: ['./product-selection.component.css'],
-  imports: [FormsModule]
+  imports: [FormsModule, CurrencyPipe]
 })
 export class ProductSelectionComponent implements OnInit {
   pageTitle = 'Seleção de Produto';
@@ -17,6 +18,9 @@ export class ProductSelectionComponent implements OnInit {
   quantidade = signal(1);
 
   produtos = signal(ProductData.products);
+
+  total = computed(() => (this.produtoSelecionado()?.price ?? 0) * this.quantidade());
+  color = computed(() => this.total() > 200 ? 'green' : 'blue');
 
   constructor() { }
 
